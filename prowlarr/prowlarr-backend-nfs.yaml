@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-nfs-prowlarr
+  namespace: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-nfs-prowlarr
+  template:
+    metadata:
+      labels:
+        app: data-nfs-prowlarr
+    spec:
+      containers:
+      - name: nfs-server-prowlarr
+        image: itsthenetwork/nfs-server-alpine:latest
+        securityContext:
+          privileged: true
+        env:
+        - name: SHARED_DIRECTORY
+          value: /data-prowlarr
+        volumeMounts:
+        - name: data-prowlarr
+          mountPath: /data-prowlarr
+        ports:
+        - name: nfs
+          containerPort: 2049
+      volumes:
+      - name: data-prowlarr
+        persistentVolumeClaim:
+          claimName: data-backend-prowlarr 

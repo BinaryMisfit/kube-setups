@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-backend-prowlarr
+  namespace: prowlarr
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  volumeName: data-backend-prowlarr-pv
+  resources:
+    requests:
+      storage: 1Gi
