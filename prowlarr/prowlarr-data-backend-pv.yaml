@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: data-backend-prowlarr-pv
+  name: prowlarr-data-backend-pv
 spec:
   capacity:
     storage: 1Gi
@@ -9,9 +9,6 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: longhorn
-  claimRef:
-    name: data-backend-prowlarr-pv
-    namespace: prowlarr
   csi:
     driver: driver.longhorn.io
-    volumeHandle: data-backend-prowlarr-pv
+    volumeHandle: prowlarr-data-backend-pv
