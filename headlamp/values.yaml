@@ -1,0 +1,164 @@
+replicaCount: 1
+image:
+  registry: ghcr.io
+  repository: headlamp-k8s/headlamp
+  pullPolicy: IfNotPresent
+  tag: "v0.38.0"
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+namespaceOverride: ""
+initContainers: []
+config:
+  inCluster: true
+  baseURL: ""
+  oidc:
+    clientID: "73kM1YB2MJP2ULqfKmp3WzoPyngba5JAfBaFblBf"
+    clientSecret: "okHgdSiqir8vdVzgtTfYwZcuQ2xXchKvVpQcSgX0wz7QLVy1NJlg1TSG9Hm11tfGUmgXp9vwhLbetk2gTyxq1QF6RgFWLsRIoW4YesJDIFxUs4XPe6FknxpsuiXIRjc3"
+    issuerURL: "https://sso.fairview.zone/application/o/headlamp/"
+    scopes: "openid,email,profile"
+    callbackURL: ""
+    validatorClientID: ""
+    validatorIssuerURL: ""
+    useAccessToken: false
+    usePKCE: false
+    externalSecret:
+      enabled: false
+      name: ""
+    meUserInfoURL: "https://sso.fairview.zone/application/o/userinfo/"
+  pluginsDir: "/headlamp/plugins"
+  enableHelm: false
+  watchPlugins: false
+  # tlsCertPath: "/headlamp-cert/headlamp-ca.crt"
+  # tlsKeyPath: "/headlamp-cert/headlamp-tls.key"
+  extraArgs: []
+# env:
+#   - name: KUBERNETES_SERVICE_HOST
+#     value: "localhost"
+#   - name: KUBERNETES_SERVICE_PORT
+#     value: "6443"
+automountServiceAccountToken: true
+serviceAccount:
+  create: false
+  annotations: {}
+  name: "headlamp-admin"
+clusterRoleBinding:
+  create: false
+  clusterRoleName: cluster-admin
+  annotations: {}
+deploymentAnnotations: {}
+podAnnotations: {}
+podLabels: {}
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+securityContext:
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  privileged: false
+  runAsUser: 100
+  runAsGroup: 101
+# Uses these defaults if this is empty.
+#   allowPrivilegeEscalation: false
+#   runAsNonRoot: true
+#   seccompProfile:
+#     type: RuntimeDefault
+#   capabilities:
+#     drop:
+#       - ALL
+service:
+  # -- Annotations to add to the service
+  annotations: {}
+  type: ClusterIP
+  port: 80
+  clusterIP: ""
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  nodePort: null
+volumeMounts: []
+volumes: []
+persistentVolumeClaim:
+  enabled: false
+  annotations:
+    {}
+  accessModes: []
+  size: ""
+  storageClassName: ""
+  selector: {}
+  volumeMode: ""
+ingress:
+  enabled: false
+  annotations:
+    {}
+    # kubernetes.io/tls-acme: "true"
+  labels: {}
+    # app.kubernetes.io/part-of: traefik
+    # environment: prod
+  ingressClassName: ""
+  hosts:
+    []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+resources:
+  {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+nodeSelector: {}
+tolerations: []
+affinity: {}
+priorityClassName: ""
+pluginsManager:
+  enabled: false
+  configFile: "plugin.yml"
+  configContent: ""
+  baseImage: node:lts-alpine
+  version: latest
+  # env:
+  # - name: HTTPS_PROXY
+  #   value: "proxy.example.com:8080"
+  # -- Specify resrouces
+  # resources:
+  #   requests:
+  #     cpu: "500m"
+  #     memory: "2048Mi"
+  #   limits:
+  #     cpu: "1000m"
+  #     memory: "4096Mi"
+  securityContext:
+    {}
+    # runAsUser: 1001
+    # runAsNonRoot: true
+    # allowPrivilegeEscalation: false
+    # readOnlyRootFilesystem: true
+    # capabilities:
+    #   drop:
+    #     - ALL
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 0
+  maxUnavailable: null
+  unhealthyPodEvictionPolicy: null
+extraManifests: []
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: my-config
+#   data:
+#     key: value
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#     name: my-config-too
+#   data:
+#     key: value

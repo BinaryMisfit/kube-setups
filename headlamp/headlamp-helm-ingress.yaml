@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: headlamp.fairview.zone.internal
+    - host: headlamp.fairview.zone
       http:
         paths:
           - path: /

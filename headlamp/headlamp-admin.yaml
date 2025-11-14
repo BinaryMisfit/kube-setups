@@ -1,11 +1,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: headlamp-admin-sa-binding
-subjects:
-- kind: ServiceAccount
   name: headlamp-admin
-  namespace: kube-system
+subjects:
+  - kind: User
+    name: diagoza@me.com
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
   name: cluster-admin
